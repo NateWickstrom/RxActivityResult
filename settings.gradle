@@ -1,0 +1,4 @@
+rootProject.name = 'rxactivityresult-root'
+include ':sample'
+include ':rxactivityresult'
+include ':rxactivityresult-support-v4'

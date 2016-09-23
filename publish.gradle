@@ -1,0 +1,93 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+
+Properties properties = new Properties()
+try {
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+} catch (FileNotFoundException ignore) {}
+
+
+def siteUrl = 'https://github.com/NateWickstrom/RxActivityResult'
+def gitUrl = 'https://github.com/NateWickstrom/RxActivityResult.git'
+def repoDescription = 'An Rx wrapper for receiving results of an Activity'
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+
+    pkg {
+        repo = 'maven'
+        name = GROUP + ":" + POM_ARTIFACT_ID //'RxActivityResult'
+        desc = repoDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        issueTrackerUrl = 'https://github.com/NateWickstrom/RxActivityResult/issues'
+
+        licenses = ['Apache-2.0']
+        labels = ['aar', 'android', 'rxjava']
+
+        publish = true
+        publicDownloadNumbers = true
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging 'aar'
+
+            groupId = GROUP
+            artifactId = POM_ARTIFACT_ID
+            version = VERSION_NAME
+
+            name POM_NAME
+            description repoDescription
+            url siteUrl
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+            developers {
+                developer {
+                    id 'natewickstrom'
+                    name 'Nate Wickstrom'
+                }
+            }
+            scm {
+                url siteUrl
+                connection gitUrl
+                developerConnection gitUrl
+            }
+        }
+    }
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.source
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+
+    if (JavaVersion.current().isJava8Compatible()) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}

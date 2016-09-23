@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.natewickstrom.rxactivityresult">
+
+    <application>
+        <activity
+            android:name="com.natewickstrom.rxactivityresult.ShadowActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            />
+    </application>
+
+</manifest>
