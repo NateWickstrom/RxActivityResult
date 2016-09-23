@@ -1,17 +1,16 @@
 RxActivityResult
 ================
-[ ![Download](https://api.bintray.com/packages/natewickstrom/natewickstrom/RxActivityResult/images/download.svg) ](https://bintray.com/natewickstrom/natewickstrom/RxActivityResult/_latestVersion)
 An Rx wrapper for receiving results from `startActivityForResult()` as an Observable.
 
 Download
 --------
 To launch from an Activity :
 ```groovy
-compile 'com.natewickstrom.rxactivityresult:rxactivityresult:0.1.0-rc1'
+compile 'com.natewickstrom.rxactivityresult:rxactivityresult:0.1.0-rc3'
 ```
 To launch from a Fragment :
 ```groovy
-compile 'com.natewickstrom.rxactivityresult:rxactivityresult-support-v4:0.1.0-rc1'
+compile 'com.natewickstrom.rxactivityresult:rxactivityresult-support-v4:0.1.0-rc3'
 ```
 
 Usage
