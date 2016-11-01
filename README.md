@@ -20,7 +20,7 @@ Example (with Lambdas for brevity):
 ```java
 static final int REQUEST_IMAGE_CAPTURE = 1;
  
-RxPermissions.getInstance(context).from(activity)
+RxActivityResult.getInstance(context).from(activity)
     .startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE), REQUEST_IMAGE_CAPTURE)
     .subscribe(result -> {
         if (result.getRequestCode() == REQUEST_IMAGE_CAPTURE && result.isOk() {
